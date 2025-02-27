@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/plain; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Key Generator</title>
-    <script>
-        // Function to generate a unique persistent key
-        function generateKey() {
-            const deviceInfo = navigator.userAgent; // Device + browser info
-            const date = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-            const rawKey = btoa(deviceInfo + date).slice(0, 16); // Base64 + slice
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/plain; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Generator</title>
+  <script>
+    // Function to generate a new key and store the current timestamp
+    function generateKey() {
+      const deviceInfo = navigator.userAgent;
+      const currentTimestamp = Date.now();
+      // Generate a raw key using device info and the current timestamp.
+      // Base64 encoding and then slicing to 16 characters.
+      const rawKey = btoa(deviceInfo + currentTimestamp).slice(0, 16);
+      localStorage.setItem("key", rawKey);
+      localStorage.setItem("keyTimestamp", currentTimestamp);
+      return rawKey;
+    }
 
-            localStorage.setItem("key", rawKey);
-            localStorage.setItem("keyDate", date);
+    // Function to retrieve the key if it's less than 24 hours old; otherwise, generate a new one.
+    function getKey() {
+      const storedKey = localStorage.getItem("key");
+      const storedTimestamp = localStorage.getItem("keyTimestamp");
 
-            return rawKey;
+      if (storedKey && storedTimestamp) {
+        const now = Date.now();
+        // Check if the stored key is still valid (less than 24 hours old)
+        if (now - parseInt(storedTimestamp, 10) < 86400000) {
+          return storedKey;
         }
+      }
+      return generateKey();
+    }
 
-        function getKey() {
-            const storedKey = localStorage.getItem("key");
-            const storedDate = localStorage.getItem("keyDate");
-            const today = new Date().toISOString().split("T")[0];
-
-            if (storedKey && storedDate === today) {
-                return storedKey;
-            }
-            return generateKey();
-        }
-
-        document.write(getKey()); // Show raw text only
-    </script>
+    // Write the key directly as raw text
+    document.write(getKey());
+  </script>
 </head>
 <body>
 </body>
