@@ -18,6 +18,23 @@ if(game.PlaceId == buildaboat) then
     local flyDuration = 22.5
     local flySpeed = 390.45
 
+    local GC = getconnections or get_signal_cons
+	if GC then
+		for i,v in pairs(GC(player.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
+	else
+		local VirtualUser = cloneref(game:GetService("VirtualUser"))
+		player.Idled:Connect(function()
+			VirtualUser:CaptureController()
+			VirtualUser:ClickButton2(Vector2.new())
+		end)
+	end
+
 	local Window = Fluent:CreateWindow({
 		Title = "Timeless Hub - Build A Boat For Treasure",
 		SubTitle = "by Timeless Community",
@@ -32,6 +49,15 @@ if(game.PlaceId == buildaboat) then
 		Main = Window:AddTab({ Title = "Main", Icon = "" }),
 		Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 	}
+
+    Window:SelectTab(1)
+
+    Fluent:Notify({
+        Title = "Key System",
+        Content = "Key is valid",
+        SubContent = "by Timeless Community", -- Optional
+        Duration = 5 -- Set to nil to make the notification not disappear
+    })
 
 	local Options = Fluent.Options
 
