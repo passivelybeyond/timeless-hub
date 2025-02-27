@@ -2,39 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/plain; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Key Generator</title>
   <script>
-    // Function to generate a new key and store the current timestamp
+    // Generate a new key and store the timestamp
     function generateKey() {
       const deviceInfo = navigator.userAgent;
       const currentTimestamp = Date.now();
-      // Generate a raw key using device info and the current timestamp.
-      // Base64 encoding and then slicing to 16 characters.
+      // Create a key by combining device info and current timestamp,
+      // then encode and slice it to 16 characters.
       const rawKey = btoa(deviceInfo + currentTimestamp).slice(0, 16);
       localStorage.setItem("key", rawKey);
       localStorage.setItem("keyTimestamp", currentTimestamp);
       return rawKey;
     }
 
-    // Function to retrieve the key if it's less than 24 hours old; otherwise, generate a new one.
+    // Retrieve the stored key if it's less than 24 hours old, otherwise generate a new one
     function getKey() {
       const storedKey = localStorage.getItem("key");
       const storedTimestamp = localStorage.getItem("keyTimestamp");
-
-      if (storedKey && storedTimestamp) {
-        const now = Date.now();
-        // Check if the stored key is still valid (less than 24 hours old)
-        if (now - parseInt(storedTimestamp, 10) < 86400000) {
+      if (storedKey && storedTimestamp && (Date.now() - parseInt(storedTimestamp, 10) < 86400000)) {
           return storedKey;
-        }
       }
       return generateKey();
     }
 
-    // Write the key directly as raw text
-    document.write(getKey());
+    // Get the key
+    const key = getKey();
+    
+    // Replace the document with plain text output
+    document.open("text/plain", "replace");
+    document.write(key);
+    document.close();
   </script>
 </head>
 <body>
