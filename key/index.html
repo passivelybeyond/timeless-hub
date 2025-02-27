@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Random Key</title>
-  <script>
-    // Function to generate a random alphanumeric string of a given length
-    function generateRandomKey(length) {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return result;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/plain; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Generator</title>
+    <script>
+        // Function to generate a unique persistent key
+        function generateKey() {
+            const deviceInfo = navigator.userAgent; // Device + browser info
+            const date = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+            const rawKey = btoa(deviceInfo + date).slice(0, 16); // Base64 + slice
 
-    window.addEventListener('DOMContentLoaded', function() {
-      // Generate a random key and set it as the page's raw text
-      const randomKey = generateRandomKey(16);
-      document.body.textContent = randomKey;
-    });
-  </script>
+            localStorage.setItem("key", rawKey);
+            localStorage.setItem("keyDate", date);
+
+            return rawKey;
+        }
+
+        function getKey() {
+            const storedKey = localStorage.getItem("key");
+            const storedDate = localStorage.getItem("keyDate");
+            const today = new Date().toISOString().split("T")[0];
+
+            if (storedKey && storedDate === today) {
+                return storedKey;
+            }
+            return generateKey();
+        }
+
+        document.write(getKey()); // Show raw text only
+    </script>
 </head>
 <body>
 </body>
