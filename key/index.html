@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Key</title>
+  <script>
+    // Function to generate a random alphanumeric string of a given length
+    function generateRandomKey(length) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      // Generate a random key and set it as the page's raw text
+      const randomKey = generateRandomKey(16);
+      document.body.textContent = randomKey;
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
