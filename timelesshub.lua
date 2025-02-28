@@ -11,6 +11,8 @@ local Humanoid = character.Humanoid
 
 -- game ids
 local buildaboat = 537413528
+local tohnoob = 1962086868
+local tohpro = 3582763398
 
 if(game.PlaceId == buildaboat) then
     local bodyVelocity
@@ -161,4 +163,6 @@ if(game.PlaceId == buildaboat) then
 			startAutoFarm()
 		end
     end)
+elseif(game.PlaceId == tohnoob or game.PlaceId == tohpro)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/eternallfrost/timeless-hub/refs/heads/main/timelesstohl.lua"))()
 end
