@@ -163,6 +163,6 @@ if(game.PlaceId == buildaboat) then
 			startAutoFarm()
 		end
     end)
-elseif(game.PlaceId == tohnoob or game.PlaceId == tohpro)
+elseif(game.PlaceId == tohnoob or game.PlaceId == tohpro) then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/eternallfrost/timeless-hub/refs/heads/main/timelesstohl.lua"))()
 end
