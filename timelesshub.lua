@@ -13,6 +13,7 @@ local Humanoid = character.Humanoid
 local buildaboat = 537413528
 local tohnoob = 1962086868
 local tohpro = 3582763398
+local slapbattles = 6403373529
 
 if(game.PlaceId == buildaboat) then
     local bodyVelocity
@@ -165,4 +166,6 @@ if(game.PlaceId == buildaboat) then
     end)
 elseif(game.PlaceId == tohnoob or game.PlaceId == tohpro) then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/eternallfrost/timeless-hub/refs/heads/main/timelesstohl.lua"))()
+elseif(game.PlaceId == slapbattles) then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/eternallfrost/timeless-hub/refs/heads/main/timelessslapfarm.lua"))()
 end
