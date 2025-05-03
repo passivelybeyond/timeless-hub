@@ -1,11 +1,3 @@
---[[
-
-LLLLLL TO YOU IF YOU SKID THIS GNG
-made by the one and only @passivelybeyond on discord
-
-]]--
-
-
 game:GetService("ReplicatedFirst"):RemoveDefaultLoadingScreen()
 
 -- LocalScript
@@ -20,14 +12,35 @@ local StarterGui    = game:GetService("StarterGui")
 local localPlayer   = Players.LocalPlayer
 local SnowHit       = RepStorage:WaitForChild("SnowHit")
 
--- Settings
+-- seconds to wait before teleporting to next server
 local WAIT_BEFORE_HOP = 2
 
 task.wait()
 
+-- 5) Continue server‑hop logic
+local function notify(title, text)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text  = text,
+    })
+end
+
 -- 1) Wait for you & the game to load
 if not game:IsLoaded() then game.Loaded:Wait() end
 repeat task.wait() until game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+local lobby = workspace:FindFirstChild("Lobby")
+local snowSlapReq = tonumber(lobby.GloveStands.Snow.SlapsInfoPart.SurfaceGui:FindFirstChild("TextLabel").Text)
+
+local slaps = game:GetService("Players").LocalPlayer:FindFirstChild("leaderstats").Slaps.Value
+
+if(slaps >= snowSlapReq) then
+    notify("Timeless Slap Farm", "You have enough slaps for the Snow glove; now equipping...")
+    task.wait()
+    fireclickdetector(lobby:FindFirstChild("Snow").ClickDetector)
+else
+    notify("Timeless Slap Farm", "You sadly don't have enough slaps for the Snow glove.")
+end
 
 -- 2) Touch lobby Teleport1 until you get "entered"
 if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("entered") then
@@ -114,14 +127,6 @@ spawn(function()
     end
 end)
 
--- 5) Continue server‑hop logic
-local function notify(title, text)
-    StarterGui:SetCore("SendNotification", {
-        Title = title,
-        Text  = text,
-    })
-end
-
 local serverList = {}
 
 while true do
@@ -136,7 +141,7 @@ while true do
     if success then
         if #serverList > 0 then
             notify(
-              "Slapple Farm",
+              "Timeless Slap Farm",
               "Found a new server! Teleporting in " .. WAIT_BEFORE_HOP .. "s…"
             )
             task.wait(WAIT_BEFORE_HOP)
@@ -149,7 +154,7 @@ while true do
             error("No servers available")
         end
     else
-        notify("Slapple Farm", "Couldn't find a server. Fallback teleportation in " .. WAIT_BEFORE_HOP .. "s…")
+        notify("Timeless Slap Farm", "Couldn't find a server. Fallback teleportation in " .. WAIT_BEFORE_HOP .. "s…")
         task.wait(WAIT_BEFORE_HOP)
         TeleportSvc:Teleport(game.PlaceId)
         -- some old stuff below hehe
