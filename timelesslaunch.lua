@@ -62,6 +62,6 @@ elseif(game.PlaceId == supportedGames[4]) then -- slap battles
     game:GetService("StarterGui"):SetCore("SendNotification",{
         Title = "Timeless Hub", -- Required
         Text = "Slap autofarm script copied to clipboard, put in the 'autoexec' folder.", -- Required
-        Duration = 10,
+        Duration = 15,
     })
 end
