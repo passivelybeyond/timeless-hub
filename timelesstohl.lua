@@ -189,8 +189,8 @@ player.CharacterAdded:Connect(function(newChar)
     print("Camera subject updated on respawn")
 end)
 
-local MainTab = Window:CreateTab("Main", 4483362458)
-local SettingsTab = Window:CreateTab("Settings", 4483362458)
+local MainTab = Window:CreateTab("Main", "layout-dashboard")
+local SettingsTab = Window:CreateTab("Settings", "settings")
 
 -- AutoFarm Toggle
 MainTab:CreateToggle({ Name = "Auto farm", CurrentValue = false, Flag = "AutoFarm", Callback = function(value)
