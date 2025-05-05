@@ -120,7 +120,7 @@ end
 
 -- Tween to a given section index
 function tweenToSection(i)
-    for _, v in pairs(sections:GetChildren()) do
+    for _, v in pairs( workspace.tower:FindFirstChild("sections"):GetChildren()) do
         if v.Name ~= "lobby" and v.Name ~= "finish" and v.i.Value == i then
             local target = v.start.CFrame
             local offset = Vector3.new(0, humanoidRootPart.Size.Y, 0)
@@ -139,7 +139,7 @@ function finishTween()
     tweenToSection("finish")
 end
 function finishGlowTween()
-    local v = sections.finish.FinishGlow
+    local v = workspace.tower:FindFirstChild("sections").finish.FinishGlow
     local target = v.CFrame
     local offset = Vector3.new(0, humanoidRootPart.Size.Y, 0)
     local final = CFrame.new(target.Position + offset) * CFrame.Angles(0, target.Rotation.Y, 0)
