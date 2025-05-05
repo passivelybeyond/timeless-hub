@@ -62,4 +62,5 @@ elseif(game.PlaceId == supportedGames[4]) then -- slap battles
         Title = "Timeless Hub", -- Required
         Text = "Slap autofarm script copied to clipboard, put in the 'autoexec' folder.", -- Required
     })
+    Rayfield:Destroy()
 end
