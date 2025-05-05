@@ -16,6 +16,8 @@ if(not table.find(supportedGames, game.PlaceId)) then
     })
 end
 
+setclipboard("https://loot-link.com/s?nIoKT50l")
+
 Window = Rayfield:CreateWindow({
    Name = "Timeless Hub - "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
