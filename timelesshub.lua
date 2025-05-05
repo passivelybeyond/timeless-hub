@@ -4,11 +4,6 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local TweenService = game:GetService("TweenService")
 
-local player = game:GetService("Players").LocalPlayer
-local character = player.Character
-local HumanoidRootPart = character.HumanoidRootPart
-local Humanoid = character.Humanoid
-
 -- game ids
 local buildaboat = 537413528
 local tohnoob = 1962086868
