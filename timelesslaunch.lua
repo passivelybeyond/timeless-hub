@@ -57,10 +57,10 @@ if(game.PlaceId == supportedGames[1] or game.PlaceId == supportedGames[2]) then 
 elseif(game.PlaceId == supportedGames[3]) then -- build a boat for treasure
     loadstring(game:HttpGet("https://raw.githubusercontent.com/passivelybeyond/timeless-hub/refs/heads/main/timelessbabft.lua"))()
 elseif(game.PlaceId == supportedGames[4]) then -- slap battles
+    Rayfield:Destroy()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/passivelybeyond/timeless-hub/refs/heads/main/timelessslapfarm.lua"))()')
     game:GetService("StarterGui"):SetCore("SendNotification",{
         Title = "Timeless Hub", -- Required
         Text = "Slap autofarm script copied to clipboard, put in the 'autoexec' folder.", -- Required
     })
-    Rayfield:Destroy()
 end
